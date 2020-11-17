@@ -1,0 +1,28 @@
+[Signal 1]
+DispName=DACOUT
+PlotType=0
+Color=255
+ValHex=0
+MinDec=0
+MinVal=0.
+MaxDec=0
+MaxVal=5.
+Mask=0
+Offset=0
+Adaptive=0
+DispNumber=1
+HeightFactor=0.5
+[Signal 2]
+DispName=(PORTF & 0x00000004) >> 2
+PlotType=1
+Color=8388608
+ValHex=0
+MinDec=0
+MinVal=0.
+MaxDec=0
+MaxVal=4294967295.
+Mask=4
+Offset=2
+Adaptive=0
+DispNumber=2
+HeightFactor=0.5
