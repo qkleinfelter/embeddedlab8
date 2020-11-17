@@ -24,9 +24,9 @@ void DAC_Init(void){
 	volatile unsigned long delay;
 	SYSCTL_RCGC2_R |= 0x02;						// Enable Port B clock
 	delay = SYSCTL_RCGC2_R;						// delay
-	GPIO_PORTB_AMSEL_R&= ~0x7F;				// Disable analog function PB6-PB0
+	GPIO_PORTB_AMSEL_R &= ~0x7F;			// Disable analog function PB6-PB0
 	GPIO_PORTB_PCTL_R &= ~0x0FFFFFFF; // Regular GPIO
-	GPIO_PORTB_DIR_R |= 0x7F;					// PB3 is output
+	GPIO_PORTB_DIR_R |= 0x7F;					// PB6-PB0 is output
 	GPIO_PORTB_AFSEL_R &= ~0x7F;			// Disable alternate functions
 	GPIO_PORTB_PUR_R &= ~0x7F;				// no pullup resistors
 	GPIO_PORTB_DEN_R |= 0x7F;					// Digial Enable PB6-PB0
@@ -38,5 +38,5 @@ void DAC_Init(void){
 // Input: 4-bit data, 0 to 15 
 // Output: none
 void DAC_Out(unsigned long data){
-  
+  GPIO_PORTB_DATA_R = data;
 }
