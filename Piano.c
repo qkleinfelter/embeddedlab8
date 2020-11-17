@@ -21,7 +21,15 @@
 // Input: none
 // Output: none
 void Piano_Init(void){ 
-  
+	volatile unsigned long delay;
+	SYSCTL_RCGC2_R |= 0x10;					  // Enable Port E Clock
+	delay = SYSCTL_RCGC2_R; 				  // delay
+	GPIO_PORTE_AMSEL_R &= ~0x0F;		  // disable analog functions
+	GPIO_PORTE_PCTL_R &= ~0x0000FFFF; // regular GPIO
+	GPIO_PORTE_DIR_R &= ~0x0F;				// PE3-PE0 inputs
+	GPIO_PORTE_AFSEL_R &= ~0x0F;			// disable alternate functions
+	GPIO_PORTE_PUR_R &= ~0x0F;				// we don't need pullup resistors
+	GPIO_PORTE_DEN_R |= 0x0F;					// Digitally enable PE3-PE0
 }
 
 // **************Piano_In*********************
