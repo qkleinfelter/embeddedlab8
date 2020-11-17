@@ -18,7 +18,7 @@
 
 // **************Piano_Init*********************
 // Initialize piano key inputs
-// Input: none
+// Input: PE3-PE0
 // Output: none
 void Piano_Init(void){ 
 	volatile unsigned long delay;
@@ -39,6 +39,5 @@ void Piano_Init(void){
 // 0x01 is key 0 pressed, 0x02 is key 1 pressed,
 // 0x04 is key 2 pressed, 0x08 is key 3 pressed
 unsigned long Piano_In(void){
-  
-  return 0; // remove this, replace with input
+  return GPIO_PORTE_DATA_R; // return the Port E data
 }
