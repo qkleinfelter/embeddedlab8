@@ -41,7 +41,7 @@ int main(void){ // Real Lab13
   
 	while(1){                
 		// input from keys to select tone
-		Sound_Tone(Piano_In() * 152672);
+		Sound_Tone(Piano_In());
   }
             
 }
