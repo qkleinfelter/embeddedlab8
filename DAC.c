@@ -27,6 +27,7 @@ void DAC_Init(void){
 	GPIO_PORTB_AMSEL_R &= ~0x7F;			// Disable analog function PB6-PB0
 	GPIO_PORTB_PCTL_R &= ~0x0FFFFFFF; // Regular GPIO
 	GPIO_PORTB_DIR_R |= 0x7F;					// PB6-PB0 is output
+	GPIO_PORTB_DR8R_R |= 0x7F;
 	GPIO_PORTB_AFSEL_R &= ~0x7F;			// Disable alternate functions
 	GPIO_PORTB_PUR_R &= ~0x7F;				// no pullup resistors
 	GPIO_PORTB_DEN_R |= 0x7F;					// Digial Enable PB6-PB0

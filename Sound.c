@@ -29,11 +29,11 @@ uint32_t pitch;
 void Sound_Init(void){
   DAC_Init();
 	
-	NVIC_ST_CTRL_R = 0;
-	NVIC_ST_RELOAD_R = 5000;
-	NVIC_ST_CURRENT_R = 0;
-	NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R & 0x00FFFFFF) | 0x40000000;
-	NVIC_ST_CTRL_R = 0x07;
+	NVIC_ST_CTRL_R = 0;				// Disable SysTick during setup
+	NVIC_ST_RELOAD_R = 5000;  // set reload
+	NVIC_ST_CURRENT_R = 0;    // clear current
+	NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R & 0x00FFFFFF) | 0x40000000; // priority 2
+	NVIC_ST_CTRL_R = 0x07;    // enable SysTick with core clock & interrupts
 	
 	pitch = 0;
 	
