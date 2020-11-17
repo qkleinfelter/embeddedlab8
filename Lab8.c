@@ -23,6 +23,7 @@
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void delay(unsigned long msec);
+void InitPortF(void);
 
 
 int main(void){ // Real Lab13 
@@ -31,7 +32,8 @@ int main(void){ // Real Lab13
 	// activate grader and set system clock to 80 MHz
   TExaS_Init(SW_PIN_PE3210, DAC_PIN_PB3210,ScopeOn);
 	
-	// PortE used for piano keys, PortB used for DAC        
+	// PortE used for piano keys, PortB used for DAC
+	InitPortF();
   Sound_Init(); // initialize SysTick timer and DAC
   Piano_Init();
   EnableInterrupts();  // enable after all initialization are done
@@ -41,6 +43,20 @@ int main(void){ // Real Lab13
 
   }
             
+}
+
+void InitPortF(void) {
+	volatile unsigned long delay;
+	SYSCTL_RCGC2_R |= 0x00000020;				// Enable Port F clock
+	delay = SYSCTL_RCGC2_R;							// delay
+	GPIO_PORTF_LOCK_R = 0x4c4F434B;			// Unlock Port F
+	GPIO_PORTF_CR_R = 0x04;							// Allow changes on PF2
+	GPIO_PORTF_AMSEL_R = 0x00;					// Disable analog function
+	GPIO_PORTF_PCTL_R = 0x00000000;			// Regular GPIO
+	GPIO_PORTF_DIR_R = 0x04;						// PF2 output
+	GPIO_PORTF_AFSEL_R = 0x00;					// disable alternate function
+	GPIO_PORTF_PUR_R = 0x00;						// no pullup resistors
+	GPIO_PORTF_DEN_R = 0x04;						// digitally enable PF2
 }
 
 void delay(unsigned long msec){ 
