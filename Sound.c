@@ -78,11 +78,18 @@ void SysTick_Handler(void){
 	
 	pitch = (pitch + 1) % GPIO_PORTE_DATA_R;
 	if (pitch == 0) {
-		DAC_Out(count);
+		// we want to output 15 and 0 twice to make it look more like a sine wave
+		if (count == 16) {
+			DAC_Out(15);
+		} else if (count == -1) {
+			DAC_Out(0);
+		} else {
+			DAC_Out(count);
+		}
 		
-		if (count == 15) {
+		if (count == 16) {
 			up = 0;
-		} else if (count == 0) {
+		} else if (count == -1) {
 			up = 1;
 		}
 		
